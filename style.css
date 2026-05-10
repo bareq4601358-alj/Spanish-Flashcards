@@ -538,14 +538,14 @@ a.statLink:focus-visible {
   font-family: ui-sans-serif, system-ui, "SF Pro Text", Segoe UI, Roboto, "Noto Sans", sans-serif;
 }
 
-/* Full-sentence cards: same type size as main deck; wrap long lines without shrinking text */
+/* Full-sentence cards: slightly smaller type than main deck, comfortable line breaks */
 .phrasePage .flashWord {
-  font-size: clamp(26px, 4vw, 42px);
-  line-height: 1.15;
-  letter-spacing: -0.035em;
+  font-size: clamp(15px, 2.4vw, 22px);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
   max-width: 100%;
   overflow-wrap: anywhere;
-  hyphens: auto;
+  hyphens: none;
 }
 
 .phrasePage .flashFace {
@@ -830,12 +830,12 @@ a.btn {
     padding: 0 clamp(12px, 4vw, 22px);
   }
 
-  /* Sentence cards: same flash text size as main vocabulary deck on phones */
+  /* Sentence cards: a bit larger than the old phone size, still well below main deck */
   .phrasePage .flashWord {
-    font-size: clamp(22px, 6.2vw, 34px);
-    padding: 0 clamp(12px, 4vw, 22px);
-    line-height: 1.15;
-    letter-spacing: -0.035em;
+    font-size: clamp(16px, 4.5vw, 23px);
+    line-height: 1.26;
+    letter-spacing: -0.022em;
+    padding: 0 clamp(11px, 3.6vw, 20px);
   }
 
   .flashcardHit {
