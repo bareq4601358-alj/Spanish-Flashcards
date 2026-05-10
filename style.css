@@ -538,14 +538,16 @@ a.statLink:focus-visible {
   font-family: ui-sans-serif, system-ui, "SF Pro Text", Segoe UI, Roboto, "Noto Sans", sans-serif;
 }
 
-/* Full-sentence cards: slightly smaller type than main deck, comfortable line breaks */
+/* Full-sentence cards: slightly smaller type than main deck; wrap at spaces, not mid-word hyphens */
 .phrasePage .flashWord {
   font-size: clamp(15px, 2.4vw, 22px);
   line-height: 1.28;
   letter-spacing: -0.02em;
   max-width: 100%;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
   hyphens: none;
+  -webkit-hyphens: none;
 }
 
 .phrasePage .flashFace {
@@ -836,6 +838,10 @@ a.btn {
     line-height: 1.26;
     letter-spacing: -0.022em;
     padding: 0 clamp(11px, 3.6vw, 20px);
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
+    -webkit-hyphens: none;
   }
 
   .flashcardHit {
