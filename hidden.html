@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Hidden cards</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header headerCompact">
+        <h1 class="title titleCenter">Hidden cards</h1>
+        <p class="subtitle subtitleTight desktopOnlyControl">
+          Cards you hid from your main decks live here. Open either list, flip through like usual, then use
+          <strong>Retrieve</strong> to put one back into the active mix.
+        </p>
+        <div class="hiddenHub">
+          <a class="hiddenHubCard btn ghost" href="./hidden-words.html">
+            <span class="hiddenHubTitle">Hidden vocabulary</span>
+            <span class="hiddenHubMeta muted"><span id="countWords">0</span> hidden</span>
+          </a>
+          <a class="hiddenHubCard btn ghost" href="./hidden-sentences.html">
+            <span class="hiddenHubTitle">Hidden sentences</span>
+            <span class="hiddenHubMeta muted"><span id="countSentences">0</span> hidden</span>
+          </a>
+        </div>
+        <div class="stats statsRow hiddenHubBack">
+          <a class="btn ghost btnSm" href="./index.html">Main deck</a>
+          <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+        </div>
+      </header>
+    </main>
+    <script src="./hidden-hub.js" defer></script>
+  </body>
+</html>

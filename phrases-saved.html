@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Saved sentences</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="phrasePage">
+    <main class="app">
+      <header class="header headerCompact">
+        <h1 class="title titleCenter">Saved sentences</h1>
+        <p class="subtitle subtitleTight desktopOnlyControl">
+          Same as the sentence deck: <kbd>←</kbd> flip · <kbd>→</kbd> flip then next ·
+          <kbd>Delete</kbd> or <kbd>Backspace</kbd> removes from this saved list only (not from your main sentence deck
+          or vocabulary).
+        </p>
+        <div class="phraseToolbar" aria-label="Saved sentences">
+          <div class="stats phraseToolbar-stats">
+            <div class="stat">
+              <div class="statLabel">Saved</div>
+              <div class="statValue" id="statTotal">—</div>
+            </div>
+            <div class="stat">
+              <div class="statLabel">#</div>
+              <div class="statValue" id="statPosition">—</div>
+            </div>
+          </div>
+          <nav class="phraseToolbar-nav" aria-label="Saved sentences actions">
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html">Sentences</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./saved.html">Vocab</a>
+            <button class="btn ghost btnSm phraseToolbar-navBtn" id="removeSavedBtn" type="button">Remove</button>
+            <button class="btn navBtn primary btnSm phraseToolbar-navBtn desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
+          </nav>
+        </div>
+      </header>
+
+      <section class="stage">
+        <section class="panel studyPanel" aria-label="Saved sentence flashcards">
+          <p class="studyHint muted studyHintSolo desktopOnlyControl" id="studyHint">Loading…</p>
+
+          <div class="studyTouchBar" role="group" aria-label="Flip and next">
+            <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
+            <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+          </div>
+
+          <div class="flashcardStage">
+            <button
+              type="button"
+              class="flashcardHit"
+              id="flashcardHit"
+              aria-label="Sentence flashcard — click to flip"
+            >
+              <div class="flashcard3d">
+                <div class="flashcardInner" id="flashcardInner">
+                  <div class="flashFace flashFaceFront">
+                    <span class="flashLabel">English</span>
+                    <p class="flashWord flashWordFront" id="textEn">—</p>
+                    <span class="flashCornerTag" id="cornerTag">—</span>
+                  </div>
+                  <div class="flashFace flashFaceBack">
+                    <span class="flashLabel">Spanish</span>
+                    <p class="flashWord flashWordEs" id="textEs">—</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div class="miniHelp miniHelpDesktopOnly">
+            <div class="keyboardHelpBlock">
+              <span class="muted">Shortcuts:</span>
+              <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd> / <kbd>Backspace</kbd> remove from saved
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer footerBar">
+        <span class="muted">This list syncs with the sentence deck (Save / S) in this browser.</span>
+      </footer>
+    </main>
+
+    <script src="./phrases-saved.js" defer></script>
+    <script src="./mobile-deck.js" defer></script>
+  </body>
+</html>

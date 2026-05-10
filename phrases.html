@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Grammar & sentence structure — English · Spanish</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="phrasePage">
+    <main class="app">
+      <header class="header headerCompact">
+        <h1 class="title titleCenter">Grammar & sentence structure</h1>
+        <p class="subtitle subtitleTight desktopOnlyControl">
+          Flip: click or <kbd>←</kbd> · Next: <kbd>→</kbd> · Save: button or <kbd>S</kbd> ·
+          <kbd>Delete</kbd> / <kbd>Backspace</kbd> or Hide hides this sentence from your main sentence deck on
+          <strong>this browser only</strong>. Saved sentences live in
+          <a class="muted inlineLink" href="./phrases-saved.html">saved sentences</a> — separate from vocabulary.
+          Tap <strong>Hidden</strong> below to restore sentences you hid by mistake.
+        </p>
+        <div class="phraseToolbar" aria-label="Sentence deck">
+          <div class="stats phraseToolbar-stats">
+            <div class="stat">
+              <div class="statLabel">In deck</div>
+              <div class="statValue" id="statDeck">—</div>
+            </div>
+            <a class="stat statLink" href="./phrases-saved.html" title="Open saved sentences">
+              <div class="statLabel">Saved</div>
+              <div class="statValue" id="statSaved">—</div>
+            </a>
+            <a class="stat statLink" href="./hidden.html" title="View or restore hidden vocabulary and sentences">
+              <div class="statLabel">Hidden</div>
+              <div class="statValue" id="statRemoved">—</div>
+            </a>
+          </div>
+          <nav class="phraseToolbar-nav" aria-label="Sentence deck actions">
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases-saved.html">Saved</a>
+            <button class="btn ghost btnSm phraseToolbar-navBtn" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save sentence; keyboard shortcut S">
+              Save
+            </button>
+            <button class="btn ghost btnSm phraseToolbar-navBtn" id="shuffleBtn" type="button">Shuffle</button>
+            <button
+              class="btn danger btnSm phraseToolbar-navBtn"
+              id="hideCardBtn"
+              type="button"
+              title="Remove this sentence from your sentence deck on this browser"
+            >
+              Hide
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <section class="stage">
+        <section class="panel studyPanel" aria-label="Sentence flashcards">
+          <div class="studyRow">
+            <p class="studyHint muted desktopOnlyControl" id="studyHint">English · flip with click or ← · Flip / Next matches →</p>
+            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
+            <div class="studyTouchBar" role="group" aria-label="Flip and next">
+              <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
+              <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+            </div>
+          </div>
+
+          <div class="flashcardStage">
+            <button
+              type="button"
+              class="flashcardHit"
+              id="flashcardHit"
+              aria-label="Sentence flashcard — click to flip"
+            >
+              <div class="flashcard3d">
+                <div class="flashcardInner" id="flashcardInner">
+                  <div class="flashFace flashFaceFront">
+                    <span class="flashLabel">English</span>
+                    <p class="flashWord flashWordFront" id="textEn">—</p>
+                    <span class="flashCornerTag" id="deckTag">—</span>
+                  </div>
+                  <div class="flashFace flashFaceBack">
+                    <span class="flashLabel">Spanish</span>
+                    <p class="flashWord flashWordEs" id="textEs">—</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div class="miniHelp" id="toastBar">
+            <div class="keyboardHelpBlock">
+              <span class="muted">Shortcuts:</span>
+              <kbd>S</kbd> save · <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd>/<kbd>Backspace</kbd> or Hide ·
+              <a class="muted inlineLink" href="./phrases-saved.html">saved sentences</a> ·
+              <a class="muted inlineLink" href="./index.html">vocabulary</a> ·
+              <a class="muted inlineLink" href="./hidden.html">hidden</a>
+            </div>
+            <span id="saveToast" class="saveToast" aria-live="polite"></span>
+          </div>
+        </section>
+      </section>
+
+    </main>
+
+    <script src="./sentence-bank.js" defer></script>
+    <script src="./phrases.js" defer></script>
+    <script src="./mobile-deck.js" defer></script>
+  </body>
+</html>
