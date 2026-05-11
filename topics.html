@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Topics — English · Spanish Flashcards</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header headerCompact">
+        <h1 class="title titleCenter">Topics</h1>
+        <p class="subtitle subtitleTight desktopOnlyControl">
+          Pick a topic to study <strong>only those words</strong>. Your full main deck is unchanged — open
+          <a class="muted inlineLink" href="./index.html">Main deck</a> anytime for everything together. Hide / Save /
+          Hidden use the same lists as the main deck.
+        </p>
+        <div class="stats statsRow" aria-label="Navigation">
+          <a class="btn ghost btnSm" href="./index.html">Main deck</a>
+          <a class="btn ghost btnSm" href="./saved.html">Saved</a>
+          <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+          <a class="btn ghost btnSm" href="./hidden.html">Hidden</a>
+        </div>
+      </header>
+
+      <section class="stage">
+        <section class="panel studyPanel topicHubPanel" aria-label="Topic list">
+          <p class="studyHint muted studyHintSolo" id="topicHubIntro">
+            Choose a topic below. Counts load from your word bank in this browser.
+          </p>
+          <div class="topicGrid" id="topicButtons" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./topics-data.js"></script>
+    <script src="./wordbank.js" defer></script>
+    <script src="./topics-hub.js" defer></script>
+  </body>
+</html>

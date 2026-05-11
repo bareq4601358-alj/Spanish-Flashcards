@@ -159,6 +159,49 @@ body {
   border-color: rgba(180, 220, 200, 0.14);
 }
 
+/* Topics hub — choose a vocabulary subset */
+.topicHubPanel {
+  width: 100%;
+}
+
+.topicGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.topicPickCard {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  gap: 6px;
+  padding: 14px 16px;
+  min-height: 96px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius);
+}
+
+.topicPickTitle {
+  font-weight: 780;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+.topicPickMeta {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.topicPickBlurb {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
 .phraseToolbar-sep {
   display: none;
   width: 1px;
@@ -806,6 +849,10 @@ a.btn {
     min-height: 44px;
     padding: 10px 12px;
     font-size: 14px;
+  }
+
+  .topicGrid {
+    grid-template-columns: 1fr;
   }
 
   .studyRow {
