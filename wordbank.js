@@ -1683,5 +1683,13 @@
     seen.add(key);
     return true;
   });
+
+  try {
+    if (typeof window.dispatchEvent === "function") {
+      window.dispatchEvent(new Event("wordbankready"));
+    }
+  } catch (e) {
+    /* ignore */
+  }
 })();
 

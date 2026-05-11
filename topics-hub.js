@@ -2,13 +2,12 @@
 (() => {
   "use strict";
 
-  const sections = Array.isArray(window.TOPIC_SECTIONS) ? window.TOPIC_SECTIONS : [];
   const root = document.getElementById("topicHubSections");
   const intro = document.getElementById("topicHubIntro");
   if (!root) return;
 
   function norm(s) {
-    return String(s ?? "").trim();
+    return String(s == null ? "" : s).trim();
   }
 
   function countForTopic(tags) {
@@ -23,16 +22,36 @@
   }
 
   function escapeHtml(s) {
-    return String(s ?? "")
+    return String(s == null ? "" : s)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
   }
 
+  function escapeAttrId(s) {
+    return String(s == null ? "" : s)
+      .replace(/[^a-zA-Z0-9_-]/g, "-")
+      .slice(0, 48);
+  }
+
+  function bankReady() {
+    return Array.isArray(window.WORD_BANK) && window.WORD_BANK.length > 0;
+  }
+
   function render() {
+    const sections = Array.isArray(window.TOPIC_SECTIONS) ? window.TOPIC_SECTIONS : [];
     root.innerHTML = "";
-    if (!sections.length) return;
+
+    if (!sections.length) {
+      if (intro) {
+        intro.textContent =
+          "Topic list failed to load (missing or blocked topics-data.js). Try a hard refresh, or open Main deck from the header.";
+      }
+      return;
+    }
+
+    const ready = bankReady();
 
     for (const sec of sections) {
       const topics = Array.isArray(sec.topics) ? sec.topics : [];
@@ -62,11 +81,12 @@
       grid.className = "topicSectionGrid";
 
       for (const t of topics) {
-        const n = countForTopic(t.tags || []);
+        const n = ready ? countForTopic(t.tags || []) : null;
+        const countLabel = n === null ? "…" : `${n} cards`;
         const a = document.createElement("a");
         a.className = "topicPickCard btn ghost";
         a.href = `./topic.html?id=${encodeURIComponent(t.id)}`;
-        a.innerHTML = `<span class="topicPickTitle">${escapeHtml(t.label)}</span><span class="topicPickMeta muted">${n} cards</span><span class="topicPickBlurb">${escapeHtml(t.blurb || "")}</span>`;
+        a.innerHTML = `<span class="topicPickTitle">${escapeHtml(t.label)}</span><span class="topicPickMeta muted">${countLabel}</span><span class="topicPickBlurb">${escapeHtml(t.blurb || "")}</span>`;
         grid.appendChild(a);
       }
 
@@ -76,20 +96,25 @@
     }
 
     if (intro) {
-      intro.textContent =
-        "Topics are grouped below. Each opens a filtered deck — your full main deck is unchanged.";
+      if (ready) {
+        intro.textContent =
+          "Topics are grouped below. Each opens a filtered deck — your full main deck is unchanged.";
+      } else {
+        intro.textContent =
+          "Loading word bank… Topics appear below; card counts fill in as soon as the deck is ready.";
+      }
     }
   }
 
-  function escapeAttrId(s) {
-    return String(s ?? "")
-      .replace(/[^a-zA-Z0-9_-]/g, "-")
-      .slice(0, 48);
-  }
+  window.addEventListener("wordbankready", render);
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", render);
-  } else {
-    render();
-  }
+  window.addEventListener("load", () => {
+    if (bankReady()) return;
+    if (intro && Array.isArray(window.TOPIC_SECTIONS) && window.TOPIC_SECTIONS.length) {
+      intro.textContent =
+        "The word list did not finish loading (wordbank.js). Try a hard refresh or check your connection.";
+    }
+  });
+
+  render();
 })();
