@@ -476,6 +476,7 @@ a.statLink:focus-visible {
 .flashFace {
   position: absolute;
   inset: 0;
+  min-width: 0;
   border-radius: 22px;
   display: grid;
   place-items: center;
@@ -483,6 +484,8 @@ a.statLink:focus-visible {
   padding: clamp(18px, 4vw, 36px);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  hyphens: none;
+  -webkit-hyphens: none;
   color: var(--paperInk);
   border: 1px solid rgba(20, 30, 40, 0.12);
   box-shadow:
@@ -531,7 +534,14 @@ a.statLink:focus-visible {
   line-height: 1.15;
   letter-spacing: -0.035em;
   text-align: center;
-  hyphens: auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
 }
 
 .flashWordEs {
