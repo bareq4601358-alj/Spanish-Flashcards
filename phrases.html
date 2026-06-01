@@ -25,28 +25,30 @@
               <div class="statValue" id="statRemoved">—</div>
             </a>
           </div>
-          <nav class="phraseToolbar-nav" aria-label="Study modes">
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html" aria-current="page">Sentences</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./writing.html">Writing</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases-saved.html">Saved</a>
-          </nav>
-          <nav class="phraseToolbar-nav" aria-label="Sentence deck actions">
-            <button class="btn ghost btnSm phraseToolbar-navBtn" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save sentence; keyboard shortcut S">
-              Save
-            </button>
-            <button class="btn ghost btnSm phraseToolbar-navBtn" id="shuffleBtn" type="button">Shuffle</button>
-            <button
-              class="btn danger btnSm phraseToolbar-navBtn"
-              id="hideCardBtn"
-              type="button"
-              title="Remove this sentence from your sentence deck on this browser"
-            >
-              Hide
-            </button>
-          </nav>
+          <div class="phraseToolbar-actions">
+            <div class="phraseToolbar-actionsInner" aria-label="Study modes and sentence deck actions">
+              <nav class="phraseToolbar-nav" aria-label="Study modes">
+                <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+                <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
+                <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
+                <a class="btn ghost btnSm phraseToolbar-navBtn" href="./writing.html">Writing</a>
+                <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases-saved.html">Saved</a>
+              </nav>
+              <nav class="phraseToolbar-nav" aria-label="Sentence deck actions">
+                <button class="btn ghost btnSm phraseToolbar-navBtn" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save sentence; keyboard shortcut S">
+                  Save
+                </button>
+                <button
+                  class="btn danger btnSm phraseToolbar-navBtn"
+                  id="hideCardBtn"
+                  type="button"
+                  title="Remove this sentence from your sentence deck on this browser"
+                >
+                  Hide
+                </button>
+              </nav>
+            </div>
+          </div>
         </div>
       </header>
 

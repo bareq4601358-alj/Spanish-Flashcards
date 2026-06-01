@@ -6,7 +6,6 @@
     statDeck: document.getElementById("statDeck"),
     statSaved: document.getElementById("statSaved"),
     statRemoved: document.getElementById("statRemoved"),
-    shuffleBtn: document.getElementById("shuffleBtn"),
     hideCardBtn: document.getElementById("hideCardBtn"),
     saveBtn: document.getElementById("saveBtn"),
     saveToast: document.getElementById("saveToast"),
@@ -224,10 +223,6 @@
     showCard(pickRow({ shuffle: false, excludeId: keyOf(current) }) || pickRow({ shuffle: true }));
   }
 
-  function shuffleCard() {
-    showCard(pickRow({ shuffle: true }) || current);
-  }
-
   function refreshAll() {
     bank = makeBank();
     renderStats();
@@ -249,7 +244,6 @@
   }
 
   function setupEvents() {
-    els.shuffleBtn.addEventListener("click", shuffleCard);
     if (els.stepBtn) els.stepBtn.addEventListener("click", stepForwardFromRightArrow);
     const flipSideBtn = document.getElementById("flipSideBtn");
     const nextCardBtn = document.getElementById("nextCardBtn");

@@ -10,7 +10,6 @@
   const els = {
     statProgress: document.getElementById("statProgress"),
     statCorrect: document.getElementById("statCorrect"),
-    shuffleBtn: document.getElementById("shuffleBtn"),
     progressBar: document.getElementById("progressBar"),
     progressFill: document.getElementById("progressFill"),
     attemptPills: document.getElementById("attemptPills"),
@@ -506,13 +505,6 @@
     handleSecondWrong(row);
   }
 
-  function reshuffleDeck() {
-    deck = shuffle(makeBank());
-    index = 0;
-    sessionCorrect = 0;
-    showSentence();
-  }
-
   function setupEvents() {
     els.writeForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -524,8 +516,6 @@
     });
 
     els.revealBtn?.addEventListener("click", revealAnswer);
-
-    els.shuffleBtn.addEventListener("click", reshuffleDeck);
 
     els.answerInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {

@@ -13,7 +13,7 @@
         <p class="subtitle subtitleTight desktopOnlyControl">
           Type each English sentence in Spanish. Two checks per sentence — tailored guidance, then the solution.
         </p>
-        <div class="stats statsRow" aria-label="Navigation">
+        <div class="stats statsRow writingStats" aria-label="Writing progress">
           <div class="stat">
             <div class="statLabel">Progress</div>
             <div class="statValue" id="statProgress">—</div>
@@ -22,13 +22,17 @@
             <div class="statLabel">Correct</div>
             <div class="statValue" id="statCorrect">0</div>
           </div>
-          <a class="btn ghost btnSm" href="./index.html">Main</a>
-          <a class="btn ghost btnSm" href="./topics.html">Topics</a>
-          <a class="btn ghost btnSm" href="./matching.html">Matching</a>
-          <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
-          <a class="btn ghost btnSm" href="./writing.html" aria-current="page">Writing</a>
-          <a class="btn ghost btnSm" href="./saved.html">Saved</a>
-          <button class="btn ghost btnSm" id="shuffleBtn" type="button">Shuffle</button>
+        </div>
+        <div class="phraseToolbar-actions">
+          <div class="phraseToolbar-actionsInner" aria-label="Navigation">
+            <nav class="phraseToolbar-nav">
+              <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+              <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
+              <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
+              <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html">Sentences</a>
+              <a class="btn ghost btnSm phraseToolbar-navBtn" href="./saved.html">Saved</a>
+            </nav>
+          </div>
         </div>
       </header>
 

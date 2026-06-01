@@ -317,6 +317,87 @@ body::before {
   flex: 0 1 auto;
 }
 
+/* Main deck, sentences, writing: one centered horizontal row of tabs/buttons */
+body.deckPage .phraseToolbar,
+body.phrasePage .phraseToolbar,
+body.writingPage .header.headerCompact {
+  align-items: center;
+  gap: 6px;
+}
+
+body.writingPage .stats.writingStats {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+body.deckPage .phraseToolbar-actions,
+body.phrasePage .phraseToolbar-actions,
+body.writingPage .phraseToolbar-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 4px 8px;
+}
+
+body.deckPage .phraseToolbar-actions::-webkit-scrollbar,
+body.phrasePage .phraseToolbar-actions::-webkit-scrollbar,
+body.writingPage .phraseToolbar-actions::-webkit-scrollbar {
+  display: none;
+  height: 0;
+}
+
+body.deckPage .phraseToolbar-actionsInner,
+body.phrasePage .phraseToolbar-actionsInner,
+body.writingPage .phraseToolbar-actionsInner {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav,
+body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav,
+body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
+body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
+body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  white-space: nowrap;
+  min-height: 38px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  border-radius: 12px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Sentence toolbar: every control fills its slot; label centered (links + buttons) */
 .phraseToolbar-nav > a.btn,
 .phraseToolbar-nav > button.btn {
@@ -1123,27 +1204,49 @@ a.btn {
     font-size: 13px;
   }
 
-  body.phrasePage .phraseToolbar-nav,
-  body.deckPage .phraseToolbar-nav {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-    width: 100%;
-    justify-items: stretch;
+  body.deckPage .phraseToolbar-actions,
+  body.phrasePage .phraseToolbar-actions,
+  body.writingPage .phraseToolbar-actions {
+    justify-content: center;
+    padding: 2px 2px 6px;
   }
 
-  body.phrasePage .phraseToolbar-nav > a.btn,
-  body.phrasePage .phraseToolbar-nav > button.btn,
-  body.deckPage .phraseToolbar-nav > a.btn,
-  body.deckPage .phraseToolbar-nav > button.btn {
-    display: flex !important;
+  body.deckPage .phraseToolbar-actionsInner,
+  body.phrasePage .phraseToolbar-actionsInner,
+  body.writingPage .phraseToolbar-actionsInner {
+    gap: 8px;
+  }
+
+  body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav,
+  body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav,
+  body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav {
+    gap: 5px;
+  }
+
+  body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+  body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
+  body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+  body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
+  body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+  body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn {
+    min-height: 42px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  body.writingPage .headerCompact .stats.writingStats {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
+    max-width: 280px;
+    margin-inline: auto;
+  }
+
+  body.writingPage .headerCompact .stats.writingStats > .stat {
+    flex: 1 1 0;
     min-width: 0;
-    min-height: 44px;
-    font-size: 13px;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center;
   }
 
   .btnSm {

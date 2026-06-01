@@ -8,7 +8,6 @@
     statDeck: document.getElementById("statDeck"),
     statSaved: document.getElementById("statSaved"),
     statRemoved: document.getElementById("statRemoved"),
-    shuffleBtn: document.getElementById("shuffleBtn"),
     hideCardBtn: document.getElementById("hideCardBtn"),
     saveBtn: document.getElementById("saveBtn"),
     saveToast: document.getElementById("saveToast"),
@@ -399,10 +398,6 @@
     showCard(pickWord({ shuffle: false, excludeId: keyOf(current) }) || pickWord({ shuffle: true }));
   }
 
-  function shuffleCard() {
-    showCard(pickWord({ shuffle: true }) || current);
-  }
-
   function refreshAll() {
     bank = makeBank();
     populateTopicMenu();
@@ -439,7 +434,6 @@
       if (e.key === "Escape") closeTopicMenu();
     });
 
-    els.shuffleBtn.addEventListener("click", shuffleCard);
     if (els.stepBtn) els.stepBtn.addEventListener("click", stepForwardFromRightArrow);
     const flipSideBtn = document.getElementById("flipSideBtn");
     const nextCardBtn = document.getElementById("nextCardBtn");
