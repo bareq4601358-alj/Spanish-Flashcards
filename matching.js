@@ -469,8 +469,6 @@
     if (li >= 0) round.leftOrder[li] = next;
     const ri = round.rightOrder.indexOf(pairId);
     if (ri >= 0) round.rightOrder[ri] = next;
-
-    round.rightOrder = shuffle(round.rightOrder.slice(0, ROUND_SIZE));
   }
 
   function fadeOutSelected() {
