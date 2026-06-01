@@ -341,30 +341,21 @@ body.phrasePage .phraseToolbar-actions,
 body.writingPage .phraseToolbar-actions {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 4px 4px 8px;
-}
-
-body.deckPage .phraseToolbar-actions::-webkit-scrollbar,
-body.phrasePage .phraseToolbar-actions::-webkit-scrollbar,
-body.writingPage .phraseToolbar-actions::-webkit-scrollbar {
-  display: none;
-  height: 0;
+  overflow: visible;
+  padding: 4px 2px 8px;
 }
 
 body.deckPage .phraseToolbar-actionsInner,
 body.phrasePage .phraseToolbar-actionsInner,
 body.writingPage .phraseToolbar-actionsInner {
-  display: inline-flex;
-  flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  flex-shrink: 0;
+  gap: 6px;
+  width: 100%;
   max-width: 100%;
 }
 
@@ -608,8 +599,20 @@ a.statLink:focus-visible {
   gap: 6px;
 }
 
-.studyControlBar .studyFlipBtn {
+.studyControlBar .studyFlipBtn,
+.studyControlBar .studyNextBtn {
   flex: 1 1 0;
+}
+
+.studyControlBar--solo {
+  justify-content: flex-end;
+}
+
+.studyControlBar--solo .studyNextBtn,
+.studyControlBar--solo #stepBtn {
+  flex: 0 1 auto;
+  width: min(140px, 42%);
+  min-width: 110px;
 }
 
 .topicDropBtnText {
@@ -1147,7 +1150,15 @@ a.btn {
   }
 
   .studyTouchBar {
-    display: flex;
+    display: none !important;
+  }
+
+  .deckHelpNote {
+    display: none !important;
+  }
+
+  .footer.footerBar {
+    display: none;
   }
 
   .keyboardHelpBlock {
@@ -1237,19 +1248,23 @@ a.btn {
   body.phrasePage .phraseToolbar-actions,
   body.writingPage .phraseToolbar-actions {
     justify-content: center;
-    padding: 2px 2px 6px;
+    padding: 2px 0 6px;
+    overflow: visible;
   }
 
   body.deckPage .phraseToolbar-actionsInner,
   body.phrasePage .phraseToolbar-actionsInner,
   body.writingPage .phraseToolbar-actionsInner {
-    gap: 8px;
+    gap: 5px 4px;
   }
 
   body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav,
   body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav,
   body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav {
-    gap: 5px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
   }
 
   body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
@@ -1258,9 +1273,11 @@ a.btn {
   body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
   body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
   body.writingPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn {
-    min-height: 42px;
-    font-size: 12px;
-    padding: 8px 12px;
+    min-height: 34px;
+    font-size: 11px;
+    font-weight: 650;
+    padding: 6px 8px;
+    line-height: 1.15;
   }
 
   body.writingPage .headerCompact .stats.writingStats {
@@ -1319,13 +1336,30 @@ a.btn {
     min-width: 100%;
   }
 
-  .studyControlBar .studyFlipBtn {
-    display: none !important;
+  .studyControlBar {
+    display: flex !important;
+    width: 100%;
+    max-width: 100%;
+    gap: 8px;
+  }
+
+  .studyControlBar .studyFlipBtn,
+  .studyControlBar .studyNextBtn,
+  .studyControlBar #stepBtn {
+    display: inline-flex !important;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .studyControlBar--solo .studyNextBtn,
+  .studyControlBar--solo #stepBtn {
+    width: min(140px, 40%);
+    min-width: 100px;
   }
 
   .topicDropBtn {
-    min-height: 50px;
-    font-size: 16px;
+    min-height: 44px;
+    font-size: 14px;
   }
 
   .topicDropItem {
@@ -1343,49 +1377,52 @@ a.btn {
   }
 
   .flashcardStage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 100%;
-    min-height: 0;
-    padding: 4px 0 2px;
-    overflow: hidden;
+    min-height: min(320px, 46svh);
+    padding: 6px 0 4px;
+    overflow: visible;
   }
 
   .flashcardHit {
     touch-action: manipulation;
     display: block;
-    width: 100%;
+    width: min(92vw, 340px);
     max-width: 100%;
-    border-radius: 18px;
+    margin: 0 auto;
+    border-radius: 20px;
   }
 
   .flashcard3d {
     width: 100%;
-    max-width: 100%;
-    perspective: 1000px;
-    border-radius: 18px;
-    overflow: hidden;
+    perspective: 1200px;
+    border-radius: 20px;
+    overflow: visible;
   }
 
   .flashcard3d:has(.flashcardInner.isFlipped) {
     box-shadow:
       0 0 0 1px rgba(94, 207, 154, 0.35),
-      0 10px 28px rgba(0, 0, 0, 0.45),
-      0 0 32px rgba(94, 207, 154, 0.14);
+      0 12px 32px rgba(0, 0, 0, 0.45),
+      0 0 40px rgba(94, 207, 154, 0.12);
   }
 
   .flashcardInner {
     width: 100%;
-    max-width: 100%;
-    min-height: min(180px, 28svh);
-    max-height: min(240px, 36svh);
-    height: min(220px, 32svh);
-    border-radius: 18px;
+    min-height: min(280px, 42svh);
+    height: min(360px, 52svh);
+    max-height: min(400px, 56svh);
+    aspect-ratio: 5 / 7;
+    border-radius: 20px;
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .flashFace {
-    padding: clamp(12px, 3vw, 20px);
-    border-radius: 18px;
+    padding: clamp(16px, 4vw, 28px);
+    border-radius: 20px;
   }
 
   .flashFaceFront {
@@ -1403,25 +1440,29 @@ a.btn {
   }
 
   .phrasePage .flashcardStage {
-    min-height: 0;
+    min-height: min(300px, 44svh);
     padding-top: 4px;
   }
 
+  .phrasePage .flashcardHit {
+    width: min(92vw, 340px);
+  }
+
   .phrasePage .flashcardInner {
-    min-height: min(160px, 26svh);
-    max-height: min(220px, 34svh);
-    height: min(200px, 30svh);
+    min-height: min(260px, 40svh);
+    height: min(340px, 50svh);
+    max-height: min(380px, 54svh);
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .flashWord {
-    font-size: clamp(18px, 5.2vw, 28px);
-    padding: 0 clamp(10px, 3vw, 16px);
-    line-height: 1.2;
+    font-size: clamp(20px, 5.5vw, 32px);
+    padding: 0 clamp(12px, 3.5vw, 20px);
+    line-height: 1.18;
   }
 
   body.phrasePage .flashFace .flashWord {
-    font-size: clamp(14px, 3.8vw, 20px);
+    font-size: clamp(15px, 4vw, 22px);
     line-height: 1.24;
     letter-spacing: -0.02em;
     padding: 0 clamp(10px, 3vw, 16px);
@@ -1457,13 +1498,6 @@ a.btn {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-  }
-
-  .deckHelpNote {
-    max-width: 100%;
-    font-size: 11px;
-    padding: 0 10px;
-    margin-top: 2px;
   }
 
   .miniHelp {
@@ -1507,24 +1541,37 @@ a.btn {
     padding: 8px 6px;
   }
 
+  .flashcardHit {
+    width: min(94vw, 320px);
+  }
+
   .flashcardInner {
-    min-height: min(150px, 24svh);
-    max-height: min(200px, 32svh);
-    height: min(175px, 28svh);
+    min-height: min(260px, 40svh);
+    height: min(340px, 50svh);
+    max-height: min(380px, 54svh);
   }
 
   .phrasePage .flashcardInner {
-    min-height: min(140px, 22svh);
-    max-height: min(185px, 28svh);
-    height: min(165px, 26svh);
+    min-height: min(240px, 38svh);
+    height: min(320px, 48svh);
+    max-height: min(360px, 52svh);
   }
 
   .flashWord {
-    font-size: clamp(16px, 4.8vw, 24px);
+    font-size: clamp(18px, 5.2vw, 28px);
   }
 
   body.phrasePage .flashFace .flashWord {
-    font-size: clamp(13px, 3.6vw, 18px);
+    font-size: clamp(14px, 3.8vw, 20px);
+  }
+
+  body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+  body.deckPage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn,
+  body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > a.btn,
+  body.phrasePage .phraseToolbar-actionsInner .phraseToolbar-nav > button.btn {
+    min-height: 32px;
+    font-size: 10px;
+    padding: 5px 7px;
   }
 
   .matchList {

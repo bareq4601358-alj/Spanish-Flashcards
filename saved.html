@@ -32,11 +32,9 @@
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Saved flashcards">
-          <div class="studyRow" role="group" aria-label="Flip and next">
-            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
-            <div class="studyTouchBar">
-              <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
-              <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+          <div class="studyRow" role="group" aria-label="Card controls">
+            <div class="studyControlBar studyControlBar--solo">
+              <button type="button" class="btn navBtn primary studyNextBtn" id="stepBtn">Flip ▸</button>
             </div>
           </div>
 
@@ -63,10 +61,6 @@
             </button>
           </div>
 
-          <p class="deckHelpNote muted">
-            Same as main: <kbd>←</kbd> flip · <kbd>→</kbd> flip then next · <kbd>Delete</kbd> or <kbd>Backspace</kbd>
-            removes from this saved list only (not from your main deck).
-          </p>
         </section>
       </section>
 
