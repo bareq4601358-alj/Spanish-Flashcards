@@ -2045,10 +2045,6 @@ body.matchingPage .matchPanel .matchStatValue {
 }
 
 @media (max-width: 768px) {
-  body.matchingPage .statsRow .matchNavSelf {
-    display: none !important;
-  }
-
   .matchTopicBarMain {
     flex-direction: column;
     align-items: stretch;
