@@ -71,8 +71,24 @@
 
       e.preventDefault();
       if (dx > 0) nextTarget.click();
-      else hit.click();
+      else {
+        window.dispatchEvent(
+          new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true, cancelable: true })
+        );
+      }
     },
     { passive: false }
+  );
+
+  /** Tap: flip to Spanish, then next card (same as Flip/Next button). Swipe left still toggles flip only. */
+  hit.addEventListener(
+    "click",
+    (e) => {
+      if (hit.disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      nextTarget.click();
+    },
+    true
   );
 })();

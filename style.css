@@ -1357,6 +1357,16 @@ a.btn {
     min-width: 100px;
   }
 
+  body.phrasePage .studyPanel[aria-label="Sentence flashcards"] .studyControlBar--solo {
+    justify-content: center;
+    width: 100%;
+  }
+
+  body.phrasePage .studyPanel[aria-label="Sentence flashcards"] .studyControlBar--solo #stepBtn {
+    width: auto;
+    max-width: none;
+  }
+
   .topicDropBtn {
     min-height: 44px;
     font-size: 14px;
