@@ -2117,6 +2117,18 @@ body.matchingPage .matchPanel .matchStatValue {
     -webkit-box-orient: vertical;
     overflow-wrap: anywhere;
   }
+
+  body.matchingPage .matchChoice.isCorrect {
+    border-color: rgba(12, 130, 72, 0.78);
+    box-shadow:
+      0 0 0 4px rgba(34, 190, 120, 0.32),
+      0 10px 24px rgba(16, 120, 72, 0.22),
+      0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(48, 210, 140, 0.55), transparent 62%),
+      linear-gradient(180deg, #c8f5dc 0%, #8ee8b8 100%);
+    color: rgba(6, 52, 32, 0.96);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
