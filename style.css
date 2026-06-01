@@ -2042,6 +2042,42 @@ body.matchingPage .matchPanel .matchStatValue {
     min-width: 110px;
     max-width: none;
   }
+
+  /* Matching desktop test: cleaner board, larger tiles */
+  body.matchingPage .app {
+    width: min(900px, 100%);
+  }
+
+  body.matchingPage .matchTopRow {
+    display: none;
+  }
+
+  body.matchingPage .matchGrid {
+    gap: 14px;
+  }
+
+  body.matchingPage .matchList {
+    grid-template-rows: repeat(5, minmax(84px, 1fr));
+    gap: 12px;
+  }
+
+  body.matchingPage .matchChoice {
+    min-height: 84px;
+    padding: 16px 14px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+
+  body.matchingPage .matchNum {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  body.matchingPage .matchText {
+    font-size: 20px;
+    line-height: 1.15;
+  }
 }
 
 @media (max-width: 768px) {
