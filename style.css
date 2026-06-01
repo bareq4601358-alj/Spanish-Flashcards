@@ -2082,6 +2082,10 @@ body.matchingPage .matchPanel .matchStatValue {
     display: none;
   }
 
+  body.matchingPage .matchToastRow {
+    display: none;
+  }
+
   body.matchingPage .matchPanel {
     padding: 10px 8px;
   }
