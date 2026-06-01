@@ -73,6 +73,33 @@
     return typeof window.primaryEnglish === "function" ? window.primaryEnglish(text) : text;
   }
 
+  /** Left column keys: 1–5 */
+  function leftKeyForIdx(idx) {
+    return idx + 1;
+  }
+
+  /** Right column keys: 6–9, then 0 for the fifth row */
+  function rightKeyForIdx(idx) {
+    return idx === ROUND_SIZE - 1 ? 0 : idx + 6;
+  }
+
+  function leftIdxFromKey(key) {
+    const n = Number(key);
+    if (n >= 1 && n <= ROUND_SIZE) return n - 1;
+    return -1;
+  }
+
+  function rightIdxFromKey(key) {
+    if (key === "0") return ROUND_SIZE - 1;
+    const n = Number(key);
+    if (n >= 6 && n <= 6 + ROUND_SIZE - 2) return n - 6;
+    return -1;
+  }
+
+  function displayNumForChoice(side, idx) {
+    return side === "left" ? leftKeyForIdx(idx) : rightKeyForIdx(idx);
+  }
+
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -284,12 +311,7 @@
     }
 
     locked = false;
-    if (resetScores) {
-      correct = 0;
-      mistakes = 0;
-      updateStats();
-    }
-    resetRound();
+    resetRound({ resetScores });
   }
 
   function onTopicSelectChange() {
@@ -380,7 +402,7 @@
 
     const number = document.createElement("span");
     number.className = "matchNum";
-    number.textContent = String(idx + 1);
+    number.textContent = String(displayNumForChoice(side, idx));
 
     const label = document.createElement("span");
     label.className = "matchText";
@@ -470,8 +492,23 @@
       side === "left" ? round.leftOrder[idx] : side === "right" ? round.rightOrder[idx] : null;
     if (!id) return;
 
-    if (side === "left") selectedLeft = { side, idx, id };
-    if (side === "right") selectedRight = { side, idx, id };
+    if (side === "left") {
+      if (selectedLeft && selectedLeft.idx === idx) {
+        selectedLeft = null;
+        syncSelectionClasses();
+        setToast("");
+        return;
+      }
+      selectedLeft = { side, idx, id };
+    } else {
+      if (selectedRight && selectedRight.idx === idx) {
+        selectedRight = null;
+        syncSelectionClasses();
+        setToast("");
+        return;
+      }
+      selectedRight = { side, idx, id };
+    }
 
     syncSelectionClasses();
 
@@ -519,21 +556,34 @@
     if (e.defaultPrevented) return;
     if (locked || matchPlayArea.hidden) return;
 
+    const tag = (e.target && e.target.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || e.target?.isContentEditable) return;
+
     const k = e.key;
-    if (!/^[1-5]$/.test(k)) return;
-    const idx = Number(k) - 1;
+    const leftIdx = leftIdxFromKey(k);
+    if (leftIdx >= 0) {
+      onPick("left", leftIdx);
+      e.preventDefault();
+      return;
+    }
 
-    if (!selectedLeft) onPick("left", idx);
-    else onPick("right", idx);
-
-    e.preventDefault();
+    const rightIdx = rightIdxFromKey(k);
+    if (rightIdx >= 0) {
+      onPick("right", rightIdx);
+      e.preventDefault();
+    }
   }
 
-  function resetRound() {
+  function resetRound({ resetScores = false } = {}) {
     if (deckIds.length < ROUND_SIZE) return;
     locked = false;
     clearSelections();
     setToast("");
+    if (resetScores) {
+      correct = 0;
+      mistakes = 0;
+      updateStats();
+    }
     buildInitialRound();
     render();
   }
@@ -547,7 +597,7 @@
     applyTopic(activeTopicId, { resetScores: true });
   }
 
-  resetBtn.addEventListener("click", () => resetRound());
+  resetBtn.addEventListener("click", () => resetRound({ resetScores: true }));
   document.addEventListener("keydown", onKeyDown);
 
   if (Array.isArray(window.WORD_BANK) && window.WORD_BANK.length) initFromBank();

@@ -11,8 +11,8 @@
       <header class="header headerCompact">
         <h1 class="title titleCenter">Matching cards</h1>
         <p class="subtitle subtitleTight desktopOnlyControl">
-          Duolingo-style matching: pick a number on the left, then the matching number on the right. Correct matches turn
-          green and instantly refill with new words.
+          Pick an English row (1–5), then the Spanish row that matches (6–9 or 0). Tap the same key again to deselect.
+          Correct pairs turn green and refill with new words.
         </p>
         <div class="stats statsRow" aria-label="Navigation">
           <a class="btn ghost btnSm" href="./index.html">Main</a>
@@ -64,7 +64,6 @@
             <div class="matchCol" aria-label="English">
               <div class="matchColHead">
                 <span class="matchColTitle">English</span>
-                <span class="matchColHint muted">Pick 1–5</span>
               </div>
               <div class="matchList" id="matchLeft" aria-label="English list"></div>
             </div>
@@ -72,7 +71,6 @@
             <div class="matchCol" aria-label="Spanish">
               <div class="matchColHead">
                 <span class="matchColTitle">Spanish</span>
-                <span class="matchColHint muted">Pick 1–5</span>
               </div>
               <div class="matchList" id="matchRight" aria-label="Spanish list"></div>
             </div>
@@ -80,7 +78,6 @@
 
           <div class="matchToastRow" aria-live="polite">
             <span class="matchToast" id="matchToast"></span>
-            <span class="muted matchKeyHint desktopOnlyControl">Keyboard: 1–5 then 1–5</span>
           </div>
           </div>
         </section>
