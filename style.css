@@ -1376,6 +1376,14 @@ a.btn {
     -webkit-tap-highlight-color: transparent;
   }
 
+  .studyPanel > .flashcardStage {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-inline: max(8px, env(safe-area-inset-left, 0px)) max(8px, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
   .flashcardStage {
     display: flex;
     justify-content: center;
@@ -1390,7 +1398,7 @@ a.btn {
   .flashcardHit {
     touch-action: manipulation;
     display: block;
-    width: min(92vw, 340px);
+    width: 100%;
     max-width: 100%;
     margin: 0 auto;
     border-radius: 20px;
@@ -1415,7 +1423,7 @@ a.btn {
     min-height: min(280px, 42svh);
     height: min(360px, 52svh);
     max-height: min(400px, 56svh);
-    aspect-ratio: 5 / 7;
+    aspect-ratio: auto;
     border-radius: 20px;
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -1445,7 +1453,8 @@ a.btn {
   }
 
   .phrasePage .flashcardHit {
-    width: min(92vw, 340px);
+    width: 100%;
+    max-width: 100%;
   }
 
   .phrasePage .flashcardInner {
@@ -1541,8 +1550,13 @@ a.btn {
     padding: 8px 6px;
   }
 
+  .studyPanel > .flashcardStage {
+    padding-inline: max(6px, env(safe-area-inset-left, 0px)) max(6px, env(safe-area-inset-right, 0px));
+  }
+
   .flashcardHit {
-    width: min(94vw, 320px);
+    width: 100%;
+    max-width: 100%;
   }
 
   .flashcardInner {
