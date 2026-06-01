@@ -2064,14 +2064,13 @@ body.matchingPage .matchPanel .matchStatValue {
   body.matchingPage .matchChoice {
     min-height: 68px;
     padding: 11px 9px;
-    gap: 9px;
+    gap: 0;
     border-radius: 12px;
+    justify-content: center;
   }
 
   body.matchingPage .matchNum {
-    width: 28px;
-    height: 28px;
-    font-size: 13px;
+    display: none;
   }
 
   body.matchingPage .matchText {
