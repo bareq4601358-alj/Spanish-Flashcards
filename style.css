@@ -1526,6 +1526,32 @@ a.btn {
   body.phrasePage .flashFace .flashWord {
     font-size: clamp(13px, 3.6vw, 18px);
   }
+
+  .matchList {
+    grid-template-rows: repeat(5, minmax(40px, auto));
+    gap: 4px;
+  }
+
+  .matchChoice {
+    min-height: 40px;
+    padding: 5px 4px;
+    gap: 4px;
+  }
+
+  .matchNum {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+
+  .matchText {
+    font-size: clamp(10px, 2.6vw, 12px);
+    -webkit-line-clamp: 2;
+  }
+
+  .matchGrid {
+    gap: 4px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1963,18 +1989,42 @@ body.matchingPage .matchPanel .matchStatValue {
     min-width: 0;
   }
   .matchGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    min-width: 0;
   }
+
+  .matchCol {
+    min-width: 0;
+  }
+
+  .matchColHead {
+    justify-content: center;
+    padding: 0 1px;
+  }
+
+  .matchColTitle {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   .matchTopRow {
     flex-direction: column;
     align-items: stretch;
   }
+
   .matchControls {
     justify-content: flex-start;
   }
+
   .matchStat {
     min-width: 0;
     flex: 1 1 0;
+  }
+
+  body.matchingPage .matchPanel {
+    padding: 10px 6px;
   }
 }
 
@@ -1992,17 +2042,32 @@ body.matchingPage .matchPanel .matchStatValue {
 
 @media (max-width: 768px) {
   .matchText {
-    font-size: 17px;
+    font-size: clamp(11px, 2.85vw, 14px);
+    font-weight: 800;
+    line-height: 1.15;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
   }
 
   .matchList {
-    grid-template-rows: repeat(5, minmax(52px, 1fr));
-    gap: 8px;
+    grid-template-rows: repeat(5, minmax(44px, auto));
+    gap: 5px;
   }
 
   .matchChoice {
-    min-height: 52px;
-    padding: 12px;
+    min-height: 44px;
+    padding: 6px 5px;
+    gap: 5px;
+    border-radius: 10px;
+  }
+
+  .matchNum {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
   }
 
   .matchTopicSelect {
