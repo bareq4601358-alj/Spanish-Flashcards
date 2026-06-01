@@ -2014,7 +2014,27 @@ body.matchingPage .matchPanel .matchStatValue {
   font-size: 12px;
 }
 
+/* Desktop: preserve pre-mobile layouts (≥769px only; mobile rules stay in max-width blocks). */
+@media (min-width: 769px) {
+  .studyControlBar--solo {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .studyControlBar--solo .studyNextBtn,
+  .studyControlBar--solo #stepBtn {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 110px;
+    max-width: none;
+  }
+}
+
 @media (max-width: 768px) {
+  body.matchingPage .statsRow .matchNavSelf {
+    display: none !important;
+  }
+
   .matchTopicBarMain {
     flex-direction: column;
     align-items: stretch;
