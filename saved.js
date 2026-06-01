@@ -7,7 +7,6 @@
   const els = {
     statTotal: document.getElementById("statTotal"),
     statPosition: document.getElementById("statPosition"),
-    studyHint: document.getElementById("studyHint"),
     stepBtn: document.getElementById("stepBtn"),
     removeSavedBtn: document.getElementById("removeSavedBtn"),
 
@@ -72,12 +71,6 @@
 
     els.statTotal.textContent = String(tot);
     els.statPosition.textContent = tot === 0 ? "—" : `${Math.min(cursor + 1, tot)} / ${tot}`;
-
-    if (els.studyHint) {
-      if (tot === 0) els.studyHint.textContent = "No saved flashcards yet. Press S while studying on the main page.";
-      else if (esp) els.studyHint.textContent = "Spanish side · Click or ← · → goes to next saved card";
-      else els.studyHint.textContent = "English side · Click, ← , or Flip · → reveals Spanish · → again advances";
-    }
   }
 
   /** @param {number} index */
@@ -103,7 +96,8 @@
     current = saved[cursor];
     if (!preserveFlip) els.flashcardInner.classList.remove("isFlipped");
     els.flashcardHit.disabled = false;
-    els.textEn.textContent = current.en;
+    els.textEn.textContent =
+      typeof window.primaryEnglish === "function" ? window.primaryEnglish(current.en) : current.en;
     els.textEs.textContent = current.es;
     els.cornerTag.textContent = `saved · ${cursor + 1}/${saved.length}`;
     updateStepUi();

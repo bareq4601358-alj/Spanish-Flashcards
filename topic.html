@@ -30,10 +30,12 @@
           <button class="btn ghost btnSm" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save to memory bank; keyboard shortcut S">
             Save
           </button>
-          <a class="btn ghost btnSm" href="./index.html">Main deck</a>
+          <a class="btn ghost btnSm" href="./index.html">Main</a>
           <a class="btn ghost btnSm" href="./topics.html">Topics</a>
-          <a class="btn ghost btnSm" href="./saved.html">Saved deck</a>
+          <a class="btn ghost btnSm" href="./matching.html">Matching</a>
           <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+          <a class="btn ghost btnSm" href="./writing.html">Writing</a>
+          <a class="btn ghost btnSm" href="./saved.html">Saved deck</a>
           <button class="btn ghost btnSm" id="shuffleBtn" type="button">Shuffle</button>
           <button
             class="btn danger btnSm"
@@ -48,12 +50,9 @@
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Topic study">
-          <div class="studyRow">
-            <p class="studyHint muted desktopOnlyControl" id="studyHint">
-              English · flip with click or ← · Flip / Next matches →
-            </p>
+          <div class="studyRow" role="group" aria-label="Flip and next">
             <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
-            <div class="studyTouchBar" role="group" aria-label="Flip and next">
+            <div class="studyTouchBar">
               <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
               <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
             </div>
@@ -83,14 +82,6 @@
           </div>
 
           <div class="miniHelp" id="toastBar">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Shortcuts:</span>
-              <kbd>S</kbd> save · <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd>/<kbd>Backspace</kbd> or Hide ·
-              <a class="muted inlineLink" href="./topics.html">topics</a> ·
-              <a class="muted inlineLink" href="./index.html">main deck</a> ·
-              <a class="muted inlineLink" href="./saved.html">saved</a> ·
-              <a class="muted inlineLink" href="./hidden.html">hidden</a>
-            </div>
             <span id="saveToast" class="saveToast" aria-live="polite"></span>
           </div>
         </section>
@@ -98,6 +89,7 @@
     </main>
 
     <script src="./topics-data.js"></script>
+    <script src="./english-display.js"></script>
     <script src="./wordbank.js" defer></script>
     <script src="./topic-main.js" defer></script>
     <script src="./mobile-deck.js" defer></script>

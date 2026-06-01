@@ -6,54 +6,72 @@
     <title>English · Spanish Flashcards</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body class="deckPage">
     <main class="app">
       <header class="header headerCompact">
         <h1 class="title titleCenter">English · Spanish Flashcards</h1>
-        <p class="subtitle subtitleTight desktopOnlyControl">
-          Flip: click or <kbd>←</kbd> · Next: <kbd>→</kbd> · Save: button or <kbd>S</kbd> ·
-          <kbd>Delete</kbd> / <kbd>Backspace</kbd> or Hide hides this card from your main deck on <strong>this browser
-          only</strong>. Tap <strong>Hidden</strong> below to review or restore cards you hid by mistake.
-        </p>
-        <div class="stats statsRow" aria-label="Deck">
-          <div class="stat">
-            <div class="statLabel">In deck</div>
-            <div class="statValue" id="statDeck">—</div>
+        <div class="phraseToolbar deckToolbar" aria-label="Deck">
+          <div class="stats phraseToolbar-stats">
+            <div class="stat">
+              <div class="statLabel">In deck</div>
+              <div class="statValue" id="statDeck">—</div>
+            </div>
+            <a class="stat statLink" href="./saved.html" title="Open saved vocabulary deck">
+              <div class="statLabel">Saved</div>
+              <div class="statValue" id="statSaved">—</div>
+            </a>
+            <a class="stat statLink" href="./hidden.html" title="View or restore hidden vocabulary and sentences">
+              <div class="statLabel">Hidden</div>
+              <div class="statValue" id="statRemoved">—</div>
+            </a>
           </div>
-          <a class="stat statLink" href="./saved.html" title="Open saved vocabulary deck">
-            <div class="statLabel">Saved</div>
-            <div class="statValue" id="statSaved">—</div>
-          </a>
-          <a class="stat statLink" href="./hidden.html" title="View or restore hidden vocabulary and sentences">
-            <div class="statLabel">Hidden</div>
-            <div class="statValue" id="statRemoved">—</div>
-          </a>
-          <button class="btn ghost btnSm" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save to memory bank; keyboard shortcut S">
-            Save
-          </button>
-          <a class="btn ghost btnSm" href="./saved.html">Saved deck</a>
-          <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
-          <a class="btn ghost btnSm" href="./topics.html">Topics</a>
-          <button class="btn ghost btnSm" id="shuffleBtn" type="button">Shuffle</button>
-          <button
-            class="btn danger btnSm"
-            id="hideCardBtn"
-            type="button"
-            title="Remove this word from your main deck on this browser"
-          >
-            Hide card
-          </button>
+          <nav class="phraseToolbar-nav" aria-label="Study modes">
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html">Sentences</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./writing.html">Writing</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./saved.html">Saved deck</a>
+          </nav>
+          <nav class="phraseToolbar-nav" aria-label="Deck actions">
+            <button class="btn ghost btnSm phraseToolbar-navBtn" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save to memory bank; keyboard shortcut S">
+              Save
+            </button>
+            <button class="btn ghost btnSm phraseToolbar-navBtn" id="shuffleBtn" type="button">Shuffle</button>
+            <button
+              class="btn danger btnSm phraseToolbar-navBtn"
+              id="hideCardBtn"
+              type="button"
+              title="Remove this word from your main deck on this browser"
+            >
+              Hide card
+            </button>
+          </nav>
         </div>
       </header>
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Study">
-          <div class="studyRow">
-            <p class="studyHint muted desktopOnlyControl" id="studyHint">
-              English · flip with click or ← · Flip / Next matches →
-            </p>
-            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
-            <div class="studyTouchBar" role="group" aria-label="Flip and next">
+          <div class="studyRow" role="group" aria-label="Topic and card controls">
+            <div class="studyControlBar">
+              <div class="topicDrop" id="topicDrop">
+                <button
+                  type="button"
+                  class="btn navBtn primary topicDropBtn"
+                  id="topicDropBtn"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="topicDropMenu"
+                >
+                  <span class="topicDropBtnText" id="topicDropLabel">All cards</span>
+                  <span class="topicDropChev" aria-hidden="true">▾</span>
+                </button>
+                <div class="topicDropMenu" id="topicDropMenu" role="listbox" aria-label="Choose a topic" hidden></div>
+              </div>
+              <button class="btn navBtn primary studyFlipBtn desktopOnlyControl" id="stepBtn" type="button">
+                Flip ▸
+              </button>
+            </div>
+            <div class="studyTouchBar">
               <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
               <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
             </div>
@@ -82,16 +100,14 @@
             </button>
           </div>
 
+          <p class="deckHelpNote muted">
+            Flip: click or <kbd>←</kbd> · Next: <kbd>→</kbd> · Save: button or <kbd>S</kbd> ·
+            <kbd>Delete</kbd> / <kbd>Backspace</kbd> or Hide hides this card from your main deck on
+            <strong>this browser only</strong>. Tap <strong>Hidden</strong> above to review or restore cards you hid by
+            mistake.
+          </p>
+
           <div class="miniHelp" id="toastBar">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Shortcuts:</span>
-              <kbd>S</kbd> save · <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd>/<kbd>Backspace</kbd> or Hide ·
-              <a class="muted inlineLink" href="./saved.html">saved deck</a> ·
-              <a class="muted inlineLink" href="./topics.html">topics</a> ·
-              <a class="muted inlineLink" href="./phrases.html">sentences</a> ·
-              <a class="muted inlineLink" href="./phrases-saved.html">saved sentences</a> ·
-              <a class="muted inlineLink" href="./hidden.html">hidden</a>
-            </div>
             <span id="saveToast" class="saveToast" aria-live="polite"></span>
           </div>
         </section>
@@ -99,6 +115,8 @@
 
     </main>
 
+    <script src="./topics-data.js"></script>
+    <script src="./english-display.js"></script>
     <script src="./wordbank.js" defer></script>
     <script src="./main.js" defer></script>
     <script src="./mobile-deck.js" defer></script>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Writing — English · Spanish</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="writingPage">
+    <main class="app">
+      <header class="header headerCompact">
+        <h1 class="title titleCenter">Writing</h1>
+        <p class="subtitle subtitleTight desktopOnlyControl">
+          Type each English sentence in Spanish. Two checks per sentence — tailored guidance, then the solution.
+        </p>
+        <div class="stats statsRow" aria-label="Navigation">
+          <div class="stat">
+            <div class="statLabel">Progress</div>
+            <div class="statValue" id="statProgress">—</div>
+          </div>
+          <div class="stat">
+            <div class="statLabel">Correct</div>
+            <div class="statValue" id="statCorrect">0</div>
+          </div>
+          <a class="btn ghost btnSm" href="./index.html">Main</a>
+          <a class="btn ghost btnSm" href="./topics.html">Topics</a>
+          <a class="btn ghost btnSm" href="./matching.html">Matching</a>
+          <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+          <a class="btn ghost btnSm" href="./writing.html" aria-current="page">Writing</a>
+          <a class="btn ghost btnSm" href="./saved.html">Saved</a>
+          <button class="btn ghost btnSm" id="shuffleBtn" type="button">Shuffle</button>
+        </div>
+      </header>
+
+      <section class="stage">
+        <section class="panel writePanel" aria-label="Sentence writing practice">
+          <header class="writeHeader">
+            <div
+              class="writeProgressTrack"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              id="progressBar"
+            >
+              <div class="writeProgressFill" id="progressFill"></div>
+            </div>
+            <div class="writeTopRow">
+              <div class="writeMeta">
+                <span class="writeStep" id="stepLabel">Sentence 1</span>
+                <span class="writeTag" id="sentenceTag">—</span>
+              </div>
+              <div class="writeAttempts" id="attemptPills" aria-label="Two tries before the answer is shown">
+                <span class="writeAttempt isActive" title="First try"></span>
+                <span class="writeAttempt isActive" title="Second try"></span>
+              </div>
+            </div>
+          </header>
+
+          <div class="writePromptCard">
+            <span class="writePromptLabel">Translate</span>
+            <blockquote class="writePromptText" id="promptEn">Loading…</blockquote>
+          </div>
+
+          <form class="writeForm" id="writeForm" novalidate>
+            <label class="writeInputLabel" for="answerInput">Spanish</label>
+            <textarea
+              id="answerInput"
+              class="writeInput"
+              rows="3"
+              placeholder="Write the full sentence…"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-describedby="feedbackBlock"
+            ></textarea>
+            <div class="writeFormActions">
+              <button type="submit" class="btn writeSubmitBtn" id="submitBtn">Check</button>
+              <button type="button" class="btn writeContinueBtn" id="continueBtn" hidden>Continue</button>
+            </div>
+          </form>
+
+          <aside class="writeCoach" id="feedbackBlock" hidden role="status" aria-live="polite">
+            <div class="writeCoachMain">
+              <div class="writeCoachIcon" id="feedbackIcon" aria-hidden="true"></div>
+              <div class="writeCoachCopy">
+                <p class="writeCoachEyebrow" id="feedbackBadge">Hint</p>
+                <p class="writeCoachTitle" id="feedbackTitle"></p>
+                <ul class="writeCoachList" id="hintList" hidden></ul>
+              </div>
+              <button
+                type="button"
+                class="writeRevealBtn"
+                id="revealBtn"
+                hidden
+                aria-label="Reveal the correct answer"
+              >
+                Reveal
+              </button>
+            </div>
+            <div class="writeAnswerBox" id="answerBox" hidden>
+              <p class="writeAnswerBoxText" id="answerBoxText"></p>
+            </div>
+            <p class="writeCoachNote" id="feedbackBody" hidden></p>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <script src="./sentence-bank.js" defer></script>
+    <script src="./writing.js" defer></script>
+  </body>
+</html>

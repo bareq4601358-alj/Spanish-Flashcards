@@ -23,20 +23,24 @@
             <div class="statLabel">#</div>
             <div class="statValue" id="statPosition">—</div>
           </div>
+          <a class="btn ghost btnSm" href="./index.html">Main</a>
           <a class="btn ghost btnSm" href="./hidden.html">All hidden</a>
+          <a class="btn ghost btnSm" href="./topics.html">Topics</a>
+          <a class="btn ghost btnSm" href="./matching.html">Matching</a>
           <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+          <a class="btn ghost btnSm" href="./writing.html">Writing</a>
           <button class="btn primary btnSm" id="retrieveBtn" type="button">Retrieve</button>
-          <button class="btn navBtn primary btnSm desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
         </div>
       </header>
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Hidden sentence cards">
-          <p class="studyHint muted studyHintSolo desktopOnlyControl" id="studyHint">Loading…</p>
-
-          <div class="studyTouchBar" role="group" aria-label="Flip and next">
-            <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
-            <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+          <div class="studyRow" role="group" aria-label="Flip and next">
+            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
+            <div class="studyTouchBar">
+              <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
+              <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+            </div>
           </div>
 
           <div class="flashcardStage">
@@ -62,15 +66,11 @@
             </button>
           </div>
 
-          <div class="miniHelp miniHelpDesktopOnly">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Flip with the card or ← · Next with → · Restore with Retrieve</span>
-            </div>
-          </div>
         </section>
       </section>
     </main>
 
+    <script src="./english-display.js"></script>
     <script src="./sentence-bank.js" defer></script>
     <script src="./hidden-sentences.js" defer></script>
     <script src="./mobile-deck.js" defer></script>

@@ -10,13 +10,6 @@
     <main class="app">
       <header class="header headerCompact">
         <h1 class="title titleCenter">Grammar & sentence structure</h1>
-        <p class="subtitle subtitleTight desktopOnlyControl">
-          Flip: click or <kbd>←</kbd> · Next: <kbd>→</kbd> · Save: button or <kbd>S</kbd> ·
-          <kbd>Delete</kbd> / <kbd>Backspace</kbd> or Hide hides this sentence from your main sentence deck on
-          <strong>this browser only</strong>. Saved sentences live in
-          <a class="muted inlineLink" href="./phrases-saved.html">saved sentences</a> — separate from vocabulary.
-          Tap <strong>Hidden</strong> below to restore sentences you hid by mistake.
-        </p>
         <div class="phraseToolbar" aria-label="Sentence deck">
           <div class="stats phraseToolbar-stats">
             <div class="stat">
@@ -32,9 +25,15 @@
               <div class="statValue" id="statRemoved">—</div>
             </a>
           </div>
-          <nav class="phraseToolbar-nav" aria-label="Sentence deck actions">
+          <nav class="phraseToolbar-nav" aria-label="Study modes">
             <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html" aria-current="page">Sentences</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./writing.html">Writing</a>
             <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases-saved.html">Saved</a>
+          </nav>
+          <nav class="phraseToolbar-nav" aria-label="Sentence deck actions">
             <button class="btn ghost btnSm phraseToolbar-navBtn" id="saveBtn" type="button" title="Keyboard shortcut: S" aria-label="Save sentence; keyboard shortcut S">
               Save
             </button>
@@ -53,10 +52,9 @@
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Sentence flashcards">
-          <div class="studyRow">
-            <p class="studyHint muted desktopOnlyControl" id="studyHint">English · flip with click or ← · Flip / Next matches →</p>
+          <div class="studyRow" role="group" aria-label="Flip and next">
             <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
-            <div class="studyTouchBar" role="group" aria-label="Flip and next">
+            <div class="studyTouchBar">
               <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
               <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
             </div>
@@ -86,13 +84,6 @@
           </div>
 
           <div class="miniHelp" id="toastBar">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Shortcuts:</span>
-              <kbd>S</kbd> save · <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd>/<kbd>Backspace</kbd> or Hide ·
-              <a class="muted inlineLink" href="./phrases-saved.html">saved sentences</a> ·
-              <a class="muted inlineLink" href="./index.html">vocabulary</a> ·
-              <a class="muted inlineLink" href="./hidden.html">hidden</a>
-            </div>
             <span id="saveToast" class="saveToast" aria-live="polite"></span>
           </div>
         </section>

@@ -28,21 +28,24 @@
           </div>
           <nav class="phraseToolbar-nav" aria-label="Saved sentences actions">
             <a class="btn ghost btnSm phraseToolbar-navBtn" href="./index.html">Main</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./topics.html">Topics</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./matching.html">Matching</a>
             <a class="btn ghost btnSm phraseToolbar-navBtn" href="./phrases.html">Sentences</a>
-            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./saved.html">Vocab</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./writing.html">Writing</a>
+            <a class="btn ghost btnSm phraseToolbar-navBtn" href="./saved.html">Vocab saved</a>
             <button class="btn ghost btnSm phraseToolbar-navBtn" id="removeSavedBtn" type="button">Remove</button>
-            <button class="btn navBtn primary btnSm phraseToolbar-navBtn desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
           </nav>
         </div>
       </header>
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Saved sentence flashcards">
-          <p class="studyHint muted studyHintSolo desktopOnlyControl" id="studyHint">Loading…</p>
-
-          <div class="studyTouchBar" role="group" aria-label="Flip and next">
-            <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
-            <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+          <div class="studyRow" role="group" aria-label="Flip and next">
+            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
+            <div class="studyTouchBar">
+              <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
+              <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+            </div>
           </div>
 
           <div class="flashcardStage">
@@ -68,12 +71,6 @@
             </button>
           </div>
 
-          <div class="miniHelp miniHelpDesktopOnly">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Shortcuts:</span>
-              <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd> / <kbd>Backspace</kbd> remove from saved
-            </div>
-          </div>
         </section>
       </section>
 
@@ -82,6 +79,7 @@
       </footer>
     </main>
 
+    <script src="./english-display.js"></script>
     <script src="./phrases-saved.js" defer></script>
     <script src="./mobile-deck.js" defer></script>
   </body>

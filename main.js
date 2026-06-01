@@ -1,6 +1,8 @@
-/* global WORD_BANK */
+/* global WORD_BANK, TOPIC_SECTIONS, TOPIC_GROUPS */
 (() => {
   "use strict";
+
+  const params = new URLSearchParams(window.location.search);
 
   const els = {
     statDeck: document.getElementById("statDeck"),
@@ -10,8 +12,11 @@
     hideCardBtn: document.getElementById("hideCardBtn"),
     saveBtn: document.getElementById("saveBtn"),
     saveToast: document.getElementById("saveToast"),
+    topicDrop: document.getElementById("topicDrop"),
+    topicDropBtn: document.getElementById("topicDropBtn"),
+    topicDropMenu: document.getElementById("topicDropMenu"),
+    topicDropLabel: document.getElementById("topicDropLabel"),
 
-    studyHint: document.getElementById("studyHint"),
     stepBtn: document.getElementById("stepBtn"),
 
     flashcardHit: document.getElementById("flashcardHit"),
@@ -24,9 +29,11 @@
   const STORAGE = {
     customWords: "flash.es-en.customWords.v1",
     removed: "flash.es-en.removed.v1",
-    // Saved memory bank (also read by saved.js)
     saved: "flash.es-en.saved.v1",
+    mainTopic: "flash.es-en.mainTopic.v1",
   };
+
+  let activeTopicId = "all";
 
   /** @type {number} */
   let saveToastClear = 0;
@@ -117,9 +124,172 @@
   let removed = loadRemoved();
   let current = null;
 
-  /** Words available to study right now */
+  function getAllTopics() {
+    const sections = Array.isArray(window.TOPIC_SECTIONS) ? window.TOPIC_SECTIONS : [];
+    return sections.flatMap((sec) => (Array.isArray(sec.topics) ? sec.topics : []));
+  }
+
+  function getTopicDef(id) {
+    if (!id || id === "all") return null;
+    const groups = Array.isArray(window.TOPIC_GROUPS) ? window.TOPIC_GROUPS : getAllTopics();
+    return groups.find((t) => t.id === id) || null;
+  }
+
+  function wordMatchesTopic(w, topicDef) {
+    if (!topicDef || !Array.isArray(topicDef.tags) || !topicDef.tags.length) return true;
+    const tagSet = new Set(topicDef.tags.map((t) => norm(t).toLowerCase()).filter(Boolean));
+    const tag = norm(w.tag || "").toLowerCase() || "general";
+    return tagSet.has(tag);
+  }
+
+  function countForTopic(topicId) {
+    const topicDef = getTopicDef(topicId);
+    let n = 0;
+    for (const w of bank) {
+      if (removed.has(keyOf(w))) continue;
+      if (topicId === "all" || wordMatchesTopic(w, topicDef)) n += 1;
+    }
+    return n;
+  }
+
+  /** Words available to study right now (topic + not hidden). */
   function activeDeck() {
-    return bank.filter((w) => !removed.has(keyOf(w)));
+    const topicDef = getTopicDef(activeTopicId);
+    return bank.filter((w) => {
+      if (removed.has(keyOf(w))) return false;
+      if (activeTopicId === "all") return true;
+      return wordMatchesTopic(w, topicDef);
+    });
+  }
+
+  function topicDisplayLabel(topicId) {
+    if (topicId === "all") return "All cards";
+    const def = getTopicDef(topicId);
+    return def?.label || topicId;
+  }
+
+  function updateTopicButtonLabel() {
+    if (els.topicDropLabel) els.topicDropLabel.textContent = topicDisplayLabel(activeTopicId);
+  }
+
+  function closeTopicMenu() {
+    if (!els.topicDrop || !els.topicDropMenu || !els.topicDropBtn) return;
+    els.topicDropMenu.hidden = true;
+    els.topicDrop.classList.remove("isOpen");
+    els.topicDropBtn.setAttribute("aria-expanded", "false");
+  }
+
+  function openTopicMenu() {
+    if (!els.topicDrop || !els.topicDropMenu || !els.topicDropBtn) return;
+    els.topicDropMenu.hidden = false;
+    els.topicDrop.classList.add("isOpen");
+    els.topicDropBtn.setAttribute("aria-expanded", "true");
+    const selected = els.topicDropMenu.querySelector(".topicDropItem.isSelected");
+    if (selected) selected.focus({ preventScroll: true });
+  }
+
+  function toggleTopicMenu() {
+    if (!els.topicDropMenu) return;
+    if (els.topicDropMenu.hidden) openTopicMenu();
+    else closeTopicMenu();
+  }
+
+  function appendTopicMenuItem(parent, topicId, label, count) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "topicDropItem";
+    btn.dataset.topicId = topicId;
+    btn.setAttribute("role", "option");
+    btn.setAttribute("aria-selected", topicId === activeTopicId ? "true" : "false");
+    if (topicId === activeTopicId) btn.classList.add("isSelected");
+    if (count === 0) btn.disabled = true;
+
+    const labelSpan = document.createElement("span");
+    labelSpan.className = "topicDropItemLabel";
+    labelSpan.textContent = label;
+
+    const countSpan = document.createElement("span");
+    countSpan.className = "topicDropItemCount";
+    countSpan.textContent = String(count);
+
+    btn.append(labelSpan, countSpan);
+    btn.addEventListener("click", () => {
+      if (btn.disabled) return;
+      closeTopicMenu();
+      applyTopic(topicId);
+    });
+    parent.appendChild(btn);
+  }
+
+  function populateTopicMenu() {
+    if (!els.topicDropMenu) return;
+
+    const sections = Array.isArray(window.TOPIC_SECTIONS) ? window.TOPIC_SECTIONS : [];
+    els.topicDropMenu.innerHTML = "";
+
+    appendTopicMenuItem(els.topicDropMenu, "all", "All cards", countForTopic("all"));
+
+    for (const sec of sections) {
+      const topics = Array.isArray(sec.topics) ? sec.topics : [];
+      if (!topics.length) continue;
+
+      const heading = document.createElement("p");
+      heading.className = "topicDropGroupLabel";
+      heading.textContent = sec.title || "Topics";
+      els.topicDropMenu.appendChild(heading);
+
+      for (const t of topics) {
+        appendTopicMenuItem(els.topicDropMenu, t.id, t.label || t.id, countForTopic(t.id));
+      }
+    }
+
+    if (!getTopicDef(activeTopicId) && activeTopicId !== "all") {
+      activeTopicId = "all";
+    }
+    updateTopicButtonLabel();
+  }
+
+  function persistTopic(id) {
+    try {
+      localStorage.setItem(STORAGE.mainTopic, id);
+    } catch {
+      // ignore
+    }
+  }
+
+  function readInitialTopicId() {
+    const fromUrl = norm(params.get("topic"));
+    if (fromUrl) {
+      if (fromUrl === "all") return "all";
+      if (getTopicDef(fromUrl) && countForTopic(fromUrl) > 0) return fromUrl;
+    }
+    try {
+      const saved = norm(localStorage.getItem(STORAGE.mainTopic));
+      if (saved === "all") return "all";
+      if (saved && getTopicDef(saved) && countForTopic(saved) > 0) return saved;
+    } catch {
+      // ignore
+    }
+    return "all";
+  }
+
+  function syncUrlTopic() {
+    const url = new URL(window.location.href);
+    if (activeTopicId === "all") url.searchParams.delete("topic");
+    else url.searchParams.set("topic", activeTopicId);
+    window.history.replaceState({}, "", url);
+  }
+
+  function applyTopic(topicId) {
+    activeTopicId = topicId === "all" || getTopicDef(topicId) ? topicId : "all";
+    if (activeTopicId !== "all" && countForTopic(activeTopicId) === 0) {
+      activeTopicId = "all";
+    }
+    persistTopic(activeTopicId);
+    syncUrlTopic();
+    populateTopicMenu();
+    renderStats();
+    showCard(pickWord({ shuffle: true }) || null);
   }
 
   function renderStats() {
@@ -180,11 +350,6 @@
   function updateStepUi() {
     const esp = showingSpanish();
     if (els.stepBtn) els.stepBtn.textContent = esp ? "Next ▸" : "Flip ▸";
-    if (els.studyHint) {
-      els.studyHint.textContent = esp
-        ? "Spanish side · Click or ← flips · → goes to next card"
-        : "English side · Click, ← , or Flip to see Spanish · → does the same, then shows next word";
-    }
   }
 
   function pickWord({ shuffle = false, excludeId = "" } = {}) {
@@ -211,7 +376,8 @@
       return;
     }
     els.flashcardHit.disabled = false;
-    els.textEn.textContent = word.en;
+    els.textEn.textContent =
+      typeof window.primaryEnglish === "function" ? window.primaryEnglish(word.en) : word.en;
     els.textEs.textContent = word.es;
     els.deckTag.textContent = word.tag;
     try {
@@ -239,6 +405,7 @@
 
   function refreshAll() {
     bank = makeBank();
+    populateTopicMenu();
     renderStats();
   }
 
@@ -254,10 +421,24 @@
     removed.add(id);
     saveRemoved(removed);
     renderStats();
+    populateTopicMenu();
     showCard(pickWord({ shuffle: true, excludeId: id }) || pickWord({ shuffle: true }) || null);
   }
 
   function setupEvents() {
+    if (els.topicDropBtn) {
+      els.topicDropBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleTopicMenu();
+      });
+    }
+    document.addEventListener("click", (e) => {
+      if (!els.topicDrop?.contains(e.target)) closeTopicMenu();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeTopicMenu();
+    });
+
     els.shuffleBtn.addEventListener("click", shuffleCard);
     if (els.stepBtn) els.stepBtn.addEventListener("click", stepForwardFromRightArrow);
     const flipSideBtn = document.getElementById("flipSideBtn");
@@ -316,7 +497,12 @@
 
   function start() {
     setupEvents();
-    refreshAll();
+    bank = makeBank();
+    removed = loadRemoved();
+    activeTopicId = readInitialTopicId();
+    populateTopicMenu();
+    syncUrlTopic();
+    renderStats();
     showCard(pickWord({ shuffle: true }) || activeDeck()[0] || null);
     updateStepUi();
   }

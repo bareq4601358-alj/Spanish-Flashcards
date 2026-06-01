@@ -40,7 +40,6 @@
     saveBtn: document.getElementById("saveBtn"),
     saveToast: document.getElementById("saveToast"),
 
-    studyHint: document.getElementById("studyHint"),
     stepBtn: document.getElementById("stepBtn"),
 
     flashcardHit: document.getElementById("flashcardHit"),
@@ -202,11 +201,6 @@
   function updateStepUi() {
     const esp = showingSpanish();
     if (els.stepBtn) els.stepBtn.textContent = esp ? "Next ▸" : "Flip ▸";
-    if (els.studyHint) {
-      els.studyHint.textContent = esp
-        ? "Spanish side · Click or ← flips · → goes to next card"
-        : "English side · Click, ← , or Flip to see Spanish · → does the same, then shows next word";
-    }
   }
 
   function pickWord({ shuffle = false, excludeId = "" } = {}) {
@@ -233,7 +227,8 @@
       return;
     }
     els.flashcardHit.disabled = false;
-    els.textEn.textContent = word.en;
+    els.textEn.textContent =
+      typeof window.primaryEnglish === "function" ? window.primaryEnglish(word.en) : word.en;
     els.textEs.textContent = word.es;
     els.deckTag.textContent = word.tag;
     try {

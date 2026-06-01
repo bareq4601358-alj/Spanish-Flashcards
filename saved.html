@@ -10,10 +10,6 @@
     <main class="app">
       <header class="header headerCompact">
         <h1 class="title titleCenter">Saved flashcards</h1>
-        <p class="subtitle subtitleTight desktopOnlyControl">
-          Same as main: <kbd>←</kbd> flip · <kbd>→</kbd> flip then next · <kbd>Delete</kbd> or <kbd>Backspace</kbd> removes
-          from this saved list only (not from your main deck).
-        </p>
         <div class="stats statsRow" aria-label="Saved deck">
           <div class="stat">
             <div class="statLabel">Saved</div>
@@ -24,20 +20,24 @@
             <div class="statValue" id="statPosition">—</div>
           </div>
           <a class="btn ghost btnSm" href="./index.html">Main</a>
+          <a class="btn ghost btnSm" href="./topics.html">Topics</a>
+          <a class="btn ghost btnSm" href="./matching.html">Matching</a>
           <a class="btn ghost btnSm" href="./phrases.html">Sentences</a>
+          <a class="btn ghost btnSm" href="./writing.html">Writing</a>
+          <a class="btn ghost btnSm" href="./saved.html" aria-current="page">Saved deck</a>
           <a class="btn ghost btnSm" href="./phrases-saved.html">Sent. saved</a>
           <button class="btn ghost btnSm" id="removeSavedBtn" type="button">Remove</button>
-          <button class="btn navBtn primary btnSm desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
         </div>
       </header>
 
       <section class="stage">
         <section class="panel studyPanel" aria-label="Saved flashcards">
-          <p class="studyHint muted studyHintSolo desktopOnlyControl" id="studyHint">Loading…</p>
-
-          <div class="studyTouchBar" role="group" aria-label="Flip and next">
-            <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
-            <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+          <div class="studyRow" role="group" aria-label="Flip and next">
+            <button class="btn navBtn primary desktopOnlyControl" id="stepBtn" type="button">Flip ▸</button>
+            <div class="studyTouchBar">
+              <button type="button" class="btn ghost" id="flipSideBtn">Flip</button>
+              <button type="button" class="btn navBtn primary" id="nextCardBtn">Next</button>
+            </div>
           </div>
 
           <div class="flashcardStage">
@@ -63,12 +63,10 @@
             </button>
           </div>
 
-          <div class="miniHelp miniHelpDesktopOnly">
-            <div class="keyboardHelpBlock">
-              <span class="muted">Shortcuts:</span>
-              <kbd>←</kbd> flip · <kbd>→</kbd> next · <kbd>Delete</kbd> / <kbd>Backspace</kbd> remove from saved
-            </div>
-          </div>
+          <p class="deckHelpNote muted">
+            Same as main: <kbd>←</kbd> flip · <kbd>→</kbd> flip then next · <kbd>Delete</kbd> or <kbd>Backspace</kbd>
+            removes from this saved list only (not from your main deck).
+          </p>
         </section>
       </section>
 
@@ -77,6 +75,7 @@
       </footer>
     </main>
 
+    <script src="./english-display.js"></script>
     <script src="./saved.js" defer></script>
     <script src="./mobile-deck.js" defer></script>
   </body>

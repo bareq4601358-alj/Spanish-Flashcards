@@ -8,7 +8,6 @@
   const els = {
     statTotal: document.getElementById("statTotal"),
     statPosition: document.getElementById("statPosition"),
-    studyHint: document.getElementById("studyHint"),
     stepBtn: document.getElementById("stepBtn"),
     retrieveBtn: document.getElementById("retrieveBtn"),
     flashcardHit: document.getElementById("flashcardHit"),
@@ -115,16 +114,6 @@
     els.statPosition.textContent = tot === 0 ? "—" : `${Math.min(cursor + 1, tot)} / ${tot}`;
 
     if (els.retrieveBtn) els.retrieveBtn.disabled = tot === 0;
-
-    if (els.studyHint) {
-      if (tot === 0) {
-        els.studyHint.textContent = "No hidden sentences. Hide cards from the sentence deck to see them here.";
-      } else if (esp) {
-        els.studyHint.textContent = "Spanish side · ← flips · → next · Retrieve adds back to sentence deck";
-      } else {
-        els.studyHint.textContent = "English side · ← or Flip · → shows Spanish · Retrieve restores to sentence deck";
-      }
-    }
   }
 
   function showAt(index, { preserveFlip = false } = {}) {
@@ -149,7 +138,8 @@
 
     if (!preserveFlip) els.flashcardInner.classList.remove("isFlipped");
     els.flashcardHit.disabled = false;
-    els.textEn.textContent = current.en;
+    els.textEn.textContent =
+      typeof window.primaryEnglish === "function" ? window.primaryEnglish(current.en) : current.en;
     els.textEs.textContent = current.es;
     els.cornerTag.textContent = `hidden · ${cursor + 1}/${list.length}`;
     updateStepUi();
