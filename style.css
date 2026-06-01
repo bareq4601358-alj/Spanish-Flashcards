@@ -1091,11 +1091,40 @@ a.btn {
   /* Reduces double-tap zoom on controls while keeping pinch-zoom. */
   html {
     touch-action: manipulation;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   body {
-    padding: max(10px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px))
-      max(14px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    padding: max(8px, env(safe-area-inset-top, 0px)) max(8px, env(safe-area-inset-right, 0px))
+      max(10px, env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .header,
+  .stage,
+  .panel,
+  .studyPanel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .panel {
+    padding: 10px 8px;
+  }
+
+  .title {
+    font-size: clamp(22px, 6vw, 28px);
   }
 
   .desktopOnlyControl {
@@ -1267,11 +1296,23 @@ a.btn {
 
   .studyRow {
     margin-bottom: 10px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 2px;
   }
 
   .studyControlBar {
     width: 100%;
+    max-width: 100%;
     gap: 10px;
+  }
+
+  .studyHint {
+    min-width: 0;
+  }
+
+  .navBtn {
+    min-width: 0;
   }
 
   .topicDropMenu {
@@ -1302,36 +1343,88 @@ a.btn {
   }
 
   .flashcardStage {
-    min-height: min(320px, 48svh);
-    padding: 6px 0 4px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    padding: 4px 0 2px;
+    overflow: hidden;
+  }
+
+  .flashcardHit {
+    touch-action: manipulation;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 18px;
+  }
+
+  .flashcard3d {
+    width: 100%;
+    max-width: 100%;
+    perspective: 1000px;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .flashcard3d:has(.flashcardInner.isFlipped) {
+    box-shadow:
+      0 0 0 1px rgba(94, 207, 154, 0.35),
+      0 10px 28px rgba(0, 0, 0, 0.45),
+      0 0 32px rgba(94, 207, 154, 0.14);
   }
 
   .flashcardInner {
-    min-height: min(260px, 42svh);
+    width: 100%;
+    max-width: 100%;
+    min-height: min(180px, 28svh);
+    max-height: min(240px, 36svh);
+    height: min(220px, 32svh);
+    border-radius: 18px;
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  .flashFace {
+    padding: clamp(12px, 3vw, 20px);
+    border-radius: 18px;
+  }
+
+  .flashFaceFront {
+    transform: rotateY(0deg) translateZ(2px);
+    -webkit-transform: rotateY(0deg) translateZ(2px);
+  }
+
+  .flashFaceBack {
+    transform: rotateY(180deg) translateZ(2px);
+    -webkit-transform: rotateY(180deg) translateZ(2px);
+  }
+
+  .flashFace .flashWord {
+    transform: translateZ(3px);
+  }
+
   .phrasePage .flashcardStage {
-    min-height: min(340px, 56svh);
-    padding-top: 8px;
+    min-height: 0;
+    padding-top: 4px;
   }
 
   .phrasePage .flashcardInner {
-    min-height: min(270px, 50svh);
+    min-height: min(160px, 26svh);
+    max-height: min(220px, 34svh);
+    height: min(200px, 30svh);
     transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .flashWord {
-    font-size: clamp(22px, 6.2vw, 34px);
-    padding: 0 clamp(12px, 4vw, 22px);
+    font-size: clamp(18px, 5.2vw, 28px);
+    padding: 0 clamp(10px, 3vw, 16px);
+    line-height: 1.2;
   }
 
-  /* Sentence cards: a bit larger than the old phone size, still well below main deck */
   body.phrasePage .flashFace .flashWord {
-    font-size: clamp(16px, 4.5vw, 23px);
-    line-height: 1.26;
-    letter-spacing: -0.022em;
-    padding: 0 clamp(11px, 3.6vw, 20px);
+    font-size: clamp(14px, 3.8vw, 20px);
+    line-height: 1.24;
+    letter-spacing: -0.02em;
+    padding: 0 clamp(10px, 3vw, 16px);
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: normal;
@@ -1340,13 +1433,34 @@ a.btn {
     -moz-hyphens: none !important;
   }
 
-  .flashcardHit {
-    touch-action: manipulation;
+  .flashLabel {
+    top: 10px;
+    left: 10px;
+    font-size: 9px;
+  }
+
+  .flashCornerTag {
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  body.matchingPage .app,
+  body.matchingPage .matchPanel {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.writingPage .app,
+  body.writingPage .writePanel {
     width: 100%;
-    max-width: min(520px, 100%);
+    max-width: 100%;
+    min-width: 0;
   }
 
   .deckHelpNote {
+    max-width: 100%;
     font-size: 11px;
     padding: 0 10px;
     margin-top: 2px;
@@ -1380,6 +1494,37 @@ a.btn {
     min-height: 48px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-left: max(6px, env(safe-area-inset-left, 0px));
+    padding-right: max(6px, env(safe-area-inset-right, 0px));
+  }
+
+  .panel {
+    padding: 8px 6px;
+  }
+
+  .flashcardInner {
+    min-height: min(150px, 24svh);
+    max-height: min(200px, 32svh);
+    height: min(175px, 28svh);
+  }
+
+  .phrasePage .flashcardInner {
+    min-height: min(140px, 22svh);
+    max-height: min(185px, 28svh);
+    height: min(165px, 26svh);
+  }
+
+  .flashWord {
+    font-size: clamp(16px, 4.8vw, 24px);
+  }
+
+  body.phrasePage .flashFace .flashWord {
+    font-size: clamp(13px, 3.6vw, 18px);
   }
 }
 
